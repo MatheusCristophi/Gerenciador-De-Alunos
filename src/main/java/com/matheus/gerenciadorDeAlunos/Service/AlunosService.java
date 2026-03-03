@@ -17,9 +17,9 @@ public class AlunosService {
         return repositorio.save(alunos);
     }
     public void deletarAluno(Long id){
-        Alunos alunos = repositorio.findById(id)
+        Alunos alunosId = repositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Id do Aluno não existe"));
-        repositorio.delete(alunos);
+        repositorio.delete(alunosId);
     }
     public List<Alunos> mostrarTodosAlunos(){
         return repositorio.findAll();

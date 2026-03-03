@@ -2,6 +2,8 @@ package com.matheus.gerenciadorDeAlunos.Controller;
 
 import com.matheus.gerenciadorDeAlunos.Domain.Alunos;
 import com.matheus.gerenciadorDeAlunos.Service.AlunosService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,23 +18,30 @@ public class AlunosController {
     }
 
     @GetMapping("/leraluno")
-    public List<Alunos> mostrarTodosOsAlunos(){
-        return service.mostrarTodosAlunos();
+    public ResponseEntity<List<Alunos>> mostrarTodosOsAlunos(){
+        return ResponseEntity.ok(service.mostrarTodosAlunos());
     }
+
     @GetMapping("/leralunoporid/{id}")
-    public Alunos mostrarAlunoPeloId(@PathVariable Long id){
-        return service.mostrarAlunoViaId(id);
+    public ResponseEntity<Alunos> mostrarAlunoPeloId(@PathVariable Long id){
+        return ResponseEntity.ok(service.mostrarAlunoViaId(id));
     }
+
     @PostMapping("/salvaraluno")
-    public Alunos salvarAlunos(@RequestBody Alunos alunos){
-        return service.salvarAluno(alunos);
+    public ResponseEntity<Alunos> salvarAlunos(@RequestBody Alunos alunos){
+        service.salvarAluno(alunos);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
+
     @PutMapping("/atualizaraluno/{id}")
-    public Alunos alunoAtualizado(@RequestBody Alunos alunos,@PathVariable Long id){
-        return service.atualizarAluno(alunos, id);
+    public ResponseEntity<Alunos> alunoAtualizado(@RequestBody Alunos alunos,@PathVariable Long id){
+        service.atualizarAluno(alunos, id);
+        return new ResponseEntity(HttpStatus.OK);
     }
+
     @DeleteMapping("/deletealuno/{id}")
-    public void deletaraluno(@PathVariable Long id){
+    public ResponseEntity<Alunos> deletaraluno(@PathVariable Long id){
         service.deletarAluno(id);
+        return new ResponseEntity(HttpStatus.GONE);
     }
 }
