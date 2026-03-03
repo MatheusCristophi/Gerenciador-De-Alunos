@@ -19,7 +19,7 @@ Permite realizar operações de:
 - Spring Data JPA
 - Jakarta Persistence (JPA)
 - Lombok
-- Banco de Dados (PostgreSQL)
+- Banco de Dados (MySQL)
 
 - ## 📌 Endpoints da API
 
@@ -78,3 +78,4 @@ git clone https://github.com/seuusuario/seurepositorio.git
 Matheus Cristopher
 
 Projeto desenvolvido para fins de estudo e evolução como Desenvolvedor Backend Java.
+
