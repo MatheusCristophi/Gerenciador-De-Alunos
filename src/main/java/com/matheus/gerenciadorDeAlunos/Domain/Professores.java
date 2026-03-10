@@ -12,16 +12,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Alunos {
+
+public class Professores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long id;
-    private String nome;
-    private int periodo;
-    private float notaPrimeiro;
-    private float notaSegundo;
-    private float notaTerceiro;
-    private float notaQuarto;
-    private final float notaFinal = notaPrimeiro+notaSegundo+notaTerceiro+notaQuarto;
+    Long id;
+    String name;
+    byte idade;
 }
