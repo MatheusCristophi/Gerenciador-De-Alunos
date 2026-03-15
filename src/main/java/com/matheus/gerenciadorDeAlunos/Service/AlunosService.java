@@ -46,10 +46,6 @@ public class AlunosService {
                     .orElseThrow(() -> new AlunoIdNaoEncontrado("Id não encontrado"));
             alunoExistente.setNome(alunos.getNome());
             alunoExistente.setPeriodo(alunos.getPeriodo());
-            alunoExistente.setNotaPrimeiro(alunos.getNotaPrimeiro());
-            alunoExistente.setNotaSegundo(alunos.getNotaSegundo());
-            alunoExistente.setNotaTerceiro(alunos.getNotaTerceiro());
-            alunoExistente.setNotaQuarto(alunos.getNotaQuarto());
             return repositorio.save(alunoExistente);
         } catch (AlunoNaoEncontrado e) {
             throw new RuntimeException(e.getMessage());

@@ -19,9 +19,5 @@ public class Alunos {
     private Long id;
     private String nome;
     private int periodo;
-    private float notaPrimeiro;
-    private float notaSegundo;
-    private float notaTerceiro;
-    private float notaQuarto;
-    private final float notaFinal = notaPrimeiro+notaSegundo+notaTerceiro+notaQuarto;
+    Notas[] notasT;
 }

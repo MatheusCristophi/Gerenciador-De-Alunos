@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Alunos")
+@Table(name = "Professores")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +20,5 @@ public class Professores {
     Long id;
     String name;
     byte idade;
+    Alunos[] listaAlunos;
 }
