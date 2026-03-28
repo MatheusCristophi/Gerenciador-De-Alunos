@@ -21,5 +21,5 @@ public class Alunos {
     private Long id;
     private String nome;
     private int periodo;
-    List<Notas> notasT;
+    private List<Float> notasT;
 }

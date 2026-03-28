@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Professores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
