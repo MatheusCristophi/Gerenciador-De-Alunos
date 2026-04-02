@@ -1,0 +1,39 @@
+*{
+    font-family: Arial;
+    padding: 0px;
+    margin: 0px;
+}
+section{
+    display: flex;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+#titulo {
+    cursor: pointer;
+    padding: 10px 40px 10px;
+}
+#cabecalho{
+    background-color: #0b1523;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 40px 10px;
+
+}
+#listacabecalho, nav{
+    color: white;
+    text-transform: none;
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    padding: 10px 40px 10px;
+}
+.licabecalho:hover{
+    color: white;
+    cursor: pointer;
+}

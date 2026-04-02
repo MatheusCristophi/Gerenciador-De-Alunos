@@ -21,5 +21,4 @@ public class Professores {
     Long id;
     String name;
     byte idade;
-    List<Alunos> listaAlunos;
 }

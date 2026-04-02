@@ -36,7 +36,7 @@ public class ProfessorService {
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         profEx.setName(prof.getName());
         profEx.setIdade(prof.getIdade());
-        profEx.setListaAlunos(prof.getListaAlunos());
+        //profEx.setListaAlunos(prof.getListaAlunos());
         return repositorio.save(profEx);
     }
 }

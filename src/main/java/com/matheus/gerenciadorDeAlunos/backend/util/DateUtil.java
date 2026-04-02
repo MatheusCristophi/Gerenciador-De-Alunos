@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Component
+
 public class DateUtil {
     public LocalTime getTimeNow(LocalTime localTime){
         return localTime.now();
