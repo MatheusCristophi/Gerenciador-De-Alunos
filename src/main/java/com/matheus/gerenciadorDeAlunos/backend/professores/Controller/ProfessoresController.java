@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController("/manager")
 public class ProfessoresController {
@@ -22,7 +23,7 @@ public class ProfessoresController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<Professores> getUserById(@PathVariable Long id){
+    public ResponseEntity<Professores> getUserById(@PathVariable UUID id){
         return new ResponseEntity<>(service.showTeacherById(id), HttpStatus.OK);
     }
 
@@ -32,12 +33,12 @@ public class ProfessoresController {
     }
 
     @PutMapping("/updateuser")
-    public ResponseEntity<Professores> updateUser(@PathVariable Long id, @RequestBody Professores prof){
+    public ResponseEntity<Professores> updateUser(@PathVariable UUID id, @RequestBody Professores prof){
         return new ResponseEntity<>(service.updateTeatcher(prof, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteuser")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
         service.deleteTeacherById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

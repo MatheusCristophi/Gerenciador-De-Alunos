@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Table(name = "professores")
+@Table(name = "tb_professores")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,10 +22,14 @@ public class Professores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long id;
+    private UUID professorId;
     private String name;
     private byte idade;
     @ManyToMany
-    @JoinColumn(name = "professores")
+    @JoinTable(
+            name = "alunos_professores",
+            joinColumns = @JoinColumn(name = "professores_id"),
+            inverseJoinColumns = @JoinColumn(name = "aluno_id")
+    )
     private Set<Alunos> alunos = new HashSet<>();
 }

@@ -5,6 +5,7 @@ import com.matheus.gerenciadorDeAlunos.backend.professores.Repository.Professore
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 
@@ -21,17 +22,17 @@ public class ProfessorService {
     public List<Professores> showAllTeachers(){
         return repositorio.findAll();
     }
-    public Professores showTeacherById(Long id){
+    public Professores showTeacherById(UUID id){
         return repositorio.findById(id)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
     }
-    public void deleteTeacherById(Long id){
+    public void deleteTeacherById(UUID id){
         Professores prof = repositorio.findById(id)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         repositorio.delete(prof);
 
     }
-    public Professores updateTeatcher(Professores prof, Long id){
+    public Professores updateTeatcher(Professores prof, UUID id){
         Professores profEx = repositorio.findById(id)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         profEx.setName(prof.getName());
