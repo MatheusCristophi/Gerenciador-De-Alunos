@@ -1,6 +1,6 @@
 package com.matheus.gerenciadorDeAlunos.backend.professores.Service;
 
-import com.matheus.gerenciadorDeAlunos.backend.professores.Domain.Professores;
+import com.matheus.gerenciadorDeAlunos.backend.professores.model.Professores;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Repository.ProfessoresRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -22,22 +22,22 @@ public class ProfessorService {
     public List<Professores> showAllTeachers(){
         return repositorio.findAll();
     }
-    public Professores showTeacherById(UUID id){
-        return repositorio.findById(id)
+    public Professores showTeacherById(UUID professorId){
+        return repositorio.findById(professorId)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
     }
-    public void deleteTeacherById(UUID id){
-        Professores prof = repositorio.findById(id)
+    public void deleteTeacherById(UUID professorId){
+        Professores prof = repositorio.findById(professorId)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         repositorio.delete(prof);
 
     }
-    public Professores updateTeatcher(Professores prof, UUID id){
-        Professores profEx = repositorio.findById(id)
+    public Professores updateTeatcher(Professores prof, UUID professorId){
+        Professores profEx = repositorio.findById(professorId)
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         profEx.setName(prof.getName());
         profEx.setIdade(prof.getIdade());
-        //profEx.setListaAlunos(prof.getListaAlunos());
+        profEx.setAlunos(prof.getAlunos());
         return repositorio.save(profEx);
     }
 }

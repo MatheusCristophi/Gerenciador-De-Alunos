@@ -1,4 +1,4 @@
-package com.matheus.gerenciadorDeAlunos.backend.professores.Domain;
+package com.matheus.gerenciadorDeAlunos.backend.professores.model;
 
 import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
 import jakarta.persistence.*;
@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class Professores {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false)
     private UUID professorId;
     private String name;
@@ -32,4 +33,16 @@ public class Professores {
             inverseJoinColumns = @JoinColumn(name = "aluno_id")
     )
     private Set<Alunos> alunos = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Professores that = (Professores) o;
+        return Objects.equals(professorId, that.professorId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(professorId);
+    }
 }

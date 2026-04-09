@@ -24,8 +24,8 @@ public class AlunosController {
     }
 
     @GetMapping("/readById/{id}")
-    public ResponseEntity<Alunos> mostrarAlunoPeloId(@PathVariable UUID id){
-        return ResponseEntity.ok(service.mostrarAlunoViaId(id));
+    public ResponseEntity<Alunos> mostrarAlunoPeloId(@PathVariable UUID alunosId){
+        return ResponseEntity.ok(service.mostrarAlunoViaId(alunosId));
     }
 
     @PostMapping("/save")
@@ -35,14 +35,14 @@ public class AlunosController {
     }
 
     @PutMapping("/updateById/{id}")
-    public ResponseEntity<Alunos> alunoAtualizado(@RequestBody Alunos alunos,@PathVariable UUID id){
-        service.atualizarAluno(alunos, id);
+    public ResponseEntity<Alunos> alunoAtualizado(@RequestBody Alunos alunos,@PathVariable UUID alunosId){
+        service.atualizarAluno(alunos, alunosId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Alunos> deletaraluno(@PathVariable UUID id){
-        service.deletarAluno(id);
+    public ResponseEntity<Alunos> deletaraluno(@PathVariable UUID alunosId){
+        service.deletarAluno(alunosId);
         return new ResponseEntity<>(HttpStatus.GONE);
     }
 }

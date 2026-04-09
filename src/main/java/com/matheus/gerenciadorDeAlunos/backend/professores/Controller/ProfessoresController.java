@@ -1,6 +1,6 @@
 package com.matheus.gerenciadorDeAlunos.backend.professores.Controller;
 
-import com.matheus.gerenciadorDeAlunos.backend.professores.Domain.Professores;
+import com.matheus.gerenciadorDeAlunos.backend.professores.model.Professores;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Service.ProfessorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,29 +17,29 @@ public class ProfessoresController {
         this.service = service;
     }
 
-    @GetMapping("/alluser")
+    @GetMapping("/all")
     public ResponseEntity<List<Professores>> getAllUser(){
         return new ResponseEntity<>(service.showAllTeachers(), HttpStatus.OK);
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<Professores> getUserById(@PathVariable UUID id){
-        return new ResponseEntity<>(service.showTeacherById(id), HttpStatus.OK);
+    @GetMapping("/getuser")
+    public ResponseEntity<Professores> getUserById(@PathVariable UUID professorId){
+        return new ResponseEntity<>(service.showTeacherById(professorId), HttpStatus.OK);
     }
 
-    @PostMapping("/saveuser")
+    @PostMapping("/create")
     public ResponseEntity<Professores> saveUser(@RequestBody Professores prof){
         return new ResponseEntity<>(service.saveProfessor(prof), HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateuser")
-    public ResponseEntity<Professores> updateUser(@PathVariable UUID id, @RequestBody Professores prof){
-        return new ResponseEntity<>(service.updateTeatcher(prof, id), HttpStatus.OK);
+    @PutMapping("/update")
+    public ResponseEntity<Professores> updateUser(@PathVariable UUID professorId, @RequestBody Professores prof){
+        return new ResponseEntity<>(service.updateTeatcher(prof, professorId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteuser")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
-        service.deleteTeacherById(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID professorId){
+        service.deleteTeacherById(professorId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
