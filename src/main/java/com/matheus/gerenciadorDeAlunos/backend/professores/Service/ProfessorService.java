@@ -1,7 +1,7 @@
-package com.matheus.gerenciadorDeAlunos.backend.Service;
+package com.matheus.gerenciadorDeAlunos.backend.professores.Service;
 
-import com.matheus.gerenciadorDeAlunos.backend.Domain.Professores;
-import com.matheus.gerenciadorDeAlunos.backend.Repository.ProfessoresRepositorio;
+import com.matheus.gerenciadorDeAlunos.backend.professores.Domain.Professores;
+import com.matheus.gerenciadorDeAlunos.backend.professores.Repository.ProfessoresRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

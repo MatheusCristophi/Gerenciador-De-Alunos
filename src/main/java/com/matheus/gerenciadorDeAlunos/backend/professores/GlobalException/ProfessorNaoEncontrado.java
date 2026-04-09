@@ -1,4 +1,4 @@
-package com.matheus.gerenciadorDeAlunos.backend.GlobalException;
+package com.matheus.gerenciadorDeAlunos.backend.professores.GlobalException;
 
 public class ProfessorNaoEncontrado extends RuntimeException {
     public ProfessorNaoEncontrado(String message) {

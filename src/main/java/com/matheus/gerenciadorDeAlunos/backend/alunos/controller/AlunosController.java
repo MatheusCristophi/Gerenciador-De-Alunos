@@ -1,7 +1,7 @@
-package com.matheus.gerenciadorDeAlunos.backend.Controller;
+package com.matheus.gerenciadorDeAlunos.backend.alunos.controller;
 
-import com.matheus.gerenciadorDeAlunos.backend.Domain.Alunos;
-import com.matheus.gerenciadorDeAlunos.backend.Service.AlunosService;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.service.AlunosService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

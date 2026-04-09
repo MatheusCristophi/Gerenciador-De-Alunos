@@ -1,8 +1,8 @@
-package com.matheus.gerenciadorDeAlunos.backend.Service;
+package com.matheus.gerenciadorDeAlunos.backend.alunos.service;
 
-import com.matheus.gerenciadorDeAlunos.backend.Domain.Alunos;
-import com.matheus.gerenciadorDeAlunos.backend.GlobalException.AlunoNaoEncontrado;
-import com.matheus.gerenciadorDeAlunos.backend.Repository.AlunosRepositorio;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.exceptions.AlunoNaoEncontrado;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.repository.AlunosRepositorio;
 
 import java.util.List;
 

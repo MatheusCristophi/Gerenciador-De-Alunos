@@ -1,6 +1,6 @@
-package com.matheus.gerenciadorDeAlunos.backend.Repository;
+package com.matheus.gerenciadorDeAlunos.backend.alunos.repository;
 
-import com.matheus.gerenciadorDeAlunos.backend.Domain.Alunos;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
