@@ -21,8 +21,6 @@ public class AlunosMapper {
                 .builder()
                 .nome(alunos.getNome())
                 .periodo(alunos.getPeriodo())
-                .notasT(alunos.getNotasT())
-                .professores(alunos.getProfessores())
                 .build();
     }
 }

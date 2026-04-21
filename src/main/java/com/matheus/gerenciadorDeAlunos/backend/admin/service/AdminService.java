@@ -19,9 +19,5 @@ public class AdminService {
         return repository.save(admin);
     }
 
-    @Transactional
-    public Admin login(Admin email, Admin senha){
-        Admin adminAtual = repository.findByEmailAndSenha(email, senha);
-        return adminAtual;
-    }
+
 }

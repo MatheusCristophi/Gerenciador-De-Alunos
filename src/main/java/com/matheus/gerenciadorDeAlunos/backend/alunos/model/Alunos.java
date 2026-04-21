@@ -3,6 +3,8 @@ package com.matheus.gerenciadorDeAlunos.backend.alunos.model;
 import com.matheus.gerenciadorDeAlunos.backend.professores.model.Professores;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.*;
 
@@ -18,6 +20,7 @@ public class Alunos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.UUID)
     @Column(nullable = false)
     private UUID alunoId;
 
@@ -29,8 +32,9 @@ public class Alunos {
 
     @ElementCollection
     @CollectionTable(name = "tb_notas_alunos", joinColumns = @JoinColumn(name = "aluno_id"))
-    private Set<Float> notasT;
+    @Column(name = "nota")
+    private List<Float> notasT;
 
     @ManyToMany(mappedBy = "alunos")
-    private Set<Professores> professores = new HashSet<>();
+    private List<Professores> professores;
 }
