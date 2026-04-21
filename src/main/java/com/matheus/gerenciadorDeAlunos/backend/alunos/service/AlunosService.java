@@ -1,13 +1,14 @@
 package com.matheus.gerenciadorDeAlunos.backend.alunos.service;
 
-import com.matheus.gerenciadorDeAlunos.backend.alunos.exceptions.AlunoNaoEncontrado;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.repository.AlunosRepositorio;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
-@org.springframework.stereotype.Service
+@Service
 public class AlunosService {
     final AlunosRepositorio repositorio;
 
@@ -15,26 +16,49 @@ public class AlunosService {
         this.repositorio = alunosRepositorio;
     }
 
+    @Transactional
     public Alunos salvarAluno(Alunos alunos){
             return repositorio.save(alunos);
     }
-    public void deletarAluno(UUID alunosId){
-        Alunos alunoId = repositorio.findById(alunosId)
-                .orElseThrow(() -> new RuntimeException("Id do Aluno não existe"));
-        repositorio.delete(alunoId);
+
+
+    @Transactional
+    public void deletarAlunoViaId(UUID id){
+        try{
+        repositorio.deleteById(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
+
+
     public List<Alunos> mostrarTodosAlunos(){
-            return repositorio.findAll();
+        return repositorio.findAll();
     }
-    public Alunos mostrarAlunoViaId(UUID alunosId){
-        return repositorio.findById(alunosId)
-                .orElseThrow(() -> new AlunoNaoEncontrado("Id do Aluno não encontrado"));
+
+
+    public Alunos mostrarAlunoViaId(UUID id){
+        return repositorio.findById(id)
+                .orElseThrow(()-> new RuntimeException("Id inválido"));
     }
-    public Alunos atualizarAluno(Alunos alunos, UUID alunosId){
-            Alunos alunoExistente = repositorio.findById(alunosId)
+
+
+    @Transactional
+    public Alunos atualizarAluno(Alunos alunos, UUID id){
+            Alunos alunoExistente = repositorio.findById(id)
                     .orElseThrow(() -> new RuntimeException("Id não encontrado"));
-            alunoExistente.setNome(alunos.getNome());
-            alunoExistente.setPeriodo(alunos.getPeriodo());
+            if (alunos.getNome() != null){
+                alunoExistente.setNome(alunos.getNome());
+            }
+            if (alunos.getPeriodo() != 0){
+                alunoExistente.setPeriodo(alunos.getPeriodo());
+            }
+            if (alunos.getProfessores() != null){
+                alunoExistente.setProfessores(alunos.getProfessores());
+            }
+            if (alunos.getNotasT() != null){
+                alunoExistente.setNotasT(alunos.getNotasT());
+            }
             return repositorio.save(alunoExistente);
     }
 }

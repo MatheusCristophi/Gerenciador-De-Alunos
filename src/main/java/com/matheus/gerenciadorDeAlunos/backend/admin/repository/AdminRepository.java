@@ -1,0 +1,15 @@
+package com.matheus.gerenciadorDeAlunos.backend.admin.repository;
+
+import com.matheus.gerenciadorDeAlunos.backend.admin.model.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+
+public interface AdminRepository extends JpaRepository<Admin, UUID>{
+
+    public Admin findByEmailAndSenha(Admin email, Admin senha);
+    }
+}

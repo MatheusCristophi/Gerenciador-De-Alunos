@@ -10,6 +10,7 @@ import java.util.*;
 @Table(name = "tb_alunos")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -19,23 +20,17 @@ public class Alunos {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false)
     private UUID alunoId;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private int periodo;
+
     @ElementCollection
     @CollectionTable(name = "tb_notas_alunos", joinColumns = @JoinColumn(name = "aluno_id"))
-    private List<Float> notasT;
+    private Set<Float> notasT;
+
     @ManyToMany(mappedBy = "alunos")
     private Set<Professores> professores = new HashSet<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Alunos alunos = (Alunos) o;
-        return Objects.equals(alunoId, alunos.alunoId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(alunoId);
-    }
 }

@@ -1,6 +1,8 @@
 package com.matheus.gerenciadorDeAlunos.backend.alunos.controller;
 
-import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.mapper.AlunosMapper;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.request.AlunosRequest;
+import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.response.AlunosResponse;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.service.AlunosService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,30 +21,35 @@ public class AlunosController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<Alunos>> mostrarTodosOsAlunos(){
-        return ResponseEntity.ok(service.mostrarTodosAlunos());
+    public ResponseEntity<List<AlunosResponse>> mostrarTodosOsAlunos(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service.mostrarTodosAlunos()
+                        .stream()
+                        .map(AlunosMapper::responseMapper)
+                        .toList());
     }
 
     @GetMapping("/readById/{id}")
-    public ResponseEntity<Alunos> mostrarAlunoPeloId(@PathVariable UUID alunosId){
-        return ResponseEntity.ok(service.mostrarAlunoViaId(alunosId));
+    public ResponseEntity<AlunosResponse> mostrarAlunoPeloId(@PathVariable UUID id){
+        AlunosResponse alunoBuscado = AlunosMapper.responseMapper(service.mostrarAlunoViaId(id));
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .body(AlunosMapper.responseMapper(service.mostrarAlunoViaId(id)));
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Alunos> salvarAlunos(@RequestBody Alunos alunos){
-        service.salvarAluno(alunos);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<AlunosResponse> salvarAlunos(@RequestBody AlunosRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(AlunosMapper.responseMapper(service.salvarAluno(AlunosMapper.RequestMapper(request))));
     }
 
     @PutMapping("/updateById/{id}")
-    public ResponseEntity<Alunos> alunoAtualizado(@RequestBody Alunos alunos,@PathVariable UUID alunosId){
-        service.atualizarAluno(alunos, alunosId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<AlunosResponse> alunoAtualizado(@RequestBody AlunosRequest alunos,@PathVariable UUID id){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(AlunosMapper.responseMapper(service.atualizarAluno(AlunosMapper.RequestMapper(alunos), id)));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Alunos> deletaraluno(@PathVariable UUID alunosId){
-        service.deletarAluno(alunosId);
-        return new ResponseEntity<>(HttpStatus.GONE);
+    public void deletaraluno(@PathVariable UUID id){
+        service.deletarAlunoViaId(id);
     }
 }

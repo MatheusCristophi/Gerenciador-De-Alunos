@@ -1,7 +1,0 @@
-package com.matheus.gerenciadorDeAlunos.backend.professores.GlobalException;
-
-public class ProfessorNaoEncontrado extends RuntimeException {
-    public ProfessorNaoEncontrado(String message) {
-        super("Não foi possivel deletar o professor");
-    }
-}
