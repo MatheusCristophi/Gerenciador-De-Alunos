@@ -13,7 +13,7 @@ CREATE TABLE tb_notas_alunos (
 CREATE TABLE tb_professores (
     professor_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
-    idade INT NOT NULL,
+    idade INT NOT NULL
 );
 
 CREATE TABLE alunos_professores (

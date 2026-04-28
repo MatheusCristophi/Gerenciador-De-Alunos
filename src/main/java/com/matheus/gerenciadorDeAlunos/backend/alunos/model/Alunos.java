@@ -24,6 +24,12 @@ public class Alunos {
     @Column(nullable = false)
     private UUID alunoId;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String senha;
+
     @Column(nullable = false)
     private String nome;
 

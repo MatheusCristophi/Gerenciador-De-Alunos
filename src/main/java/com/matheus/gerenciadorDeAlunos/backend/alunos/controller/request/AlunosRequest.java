@@ -4,5 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record AlunosRequest(String nome,
-                            int periodo) {
+                            int periodo,
+                            String email,
+                            String senha) {
 }

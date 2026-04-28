@@ -4,9 +4,11 @@ import com.matheus.gerenciadorDeAlunos.backend.professores.model.Professores;
 import lombok.Builder;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Builder
-public record AlunosResponse(String nome,
+public record AlunosResponse(UUID id,
+                             String nome,
                              int periodo,
                              Set<Float> notasT,
                              Set<Professores> professores) {

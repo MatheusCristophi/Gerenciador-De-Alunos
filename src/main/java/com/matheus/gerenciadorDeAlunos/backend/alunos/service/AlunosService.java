@@ -43,21 +43,28 @@ public class AlunosService {
     }
 
 
-    @Transactional
     public Alunos atualizarAluno(Alunos alunos, UUID id){
             Alunos alunoExistente = repositorio.findById(id)
                     .orElseThrow(() -> new RuntimeException("Id não encontrado"));
             if (alunos.getNome() != null){
                 alunoExistente.setNome(alunos.getNome());
+            }else{
+                alunoExistente.setNome(alunoExistente.getNome());
             }
             if (alunos.getPeriodo() != 0){
                 alunoExistente.setPeriodo(alunos.getPeriodo());
+            }else{
+                alunoExistente.setPeriodo(alunoExistente.getPeriodo());
             }
             if (alunos.getProfessores() != null){
                 alunoExistente.setProfessores(alunos.getProfessores());
+            }else{
+                alunoExistente.setProfessores(alunoExistente.getProfessores());
             }
             if (alunos.getNotasT() != null){
                 alunoExistente.setNotasT(alunos.getNotasT());
+            }else{
+                alunoExistente.setAlunoId(alunoExistente.getAlunoId());
             }
             return repositorio.save(alunoExistente);
     }

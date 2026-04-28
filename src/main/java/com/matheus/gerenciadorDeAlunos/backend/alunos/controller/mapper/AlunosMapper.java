@@ -13,6 +13,8 @@ public class AlunosMapper {
                 .builder()
                 .nome(request.nome())
                 .periodo(request.periodo())
+                .email(request.email())
+                .senha(request.senha())
                 .build();
     }
 
@@ -21,6 +23,7 @@ public class AlunosMapper {
                 .builder()
                 .nome(alunos.getNome())
                 .periodo(alunos.getPeriodo())
+                .id(alunos.getAlunoId())
                 .build();
     }
 }
