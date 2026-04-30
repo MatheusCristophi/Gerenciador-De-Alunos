@@ -1,10 +1,14 @@
 package com.matheus.gerenciadorDeAlunos.backend.alunos.model;
 
+import com.matheus.gerenciadorDeAlunos.backend.config.securityConfig.RoleEnums;
 import com.matheus.gerenciadorDeAlunos.backend.professores.model.Professores;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
@@ -16,7 +20,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Alunos {
+public class Alunos implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,6 +38,9 @@ public class Alunos {
     private String nome;
 
     @Column(nullable = false)
+    public RoleEnums role = RoleEnums.ALUNO;
+
+    @Column(nullable = false)
     private int periodo;
 
     @ElementCollection
@@ -43,4 +50,39 @@ public class Alunos {
 
     @ManyToMany(mappedBy = "alunos")
     private List<Professores> professores;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.getRoleEnums()));
+    }
+
+    @Override
+    public String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
 }

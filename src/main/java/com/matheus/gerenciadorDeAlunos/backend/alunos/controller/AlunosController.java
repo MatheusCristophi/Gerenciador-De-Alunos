@@ -4,6 +4,7 @@ import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.mapper.AlunosMa
 import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.request.AlunosRequest;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.response.AlunosResponse;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.service.AlunosService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/aluno")
 public class AlunosController {
     AlunosService service;
 
@@ -36,14 +37,14 @@ public class AlunosController {
                 .body(AlunosMapper.responseMapper(service.mostrarAlunoViaId(id)));
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<AlunosResponse> salvarAlunos(@RequestBody AlunosRequest request){
+    @PostMapping("/registrar")
+    public ResponseEntity<AlunosResponse> registrar(@RequestBody @Valid AlunosRequest request){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(AlunosMapper.responseMapper(service.salvarAluno(AlunosMapper.RequestMapper(request))));
+                .body(AlunosMapper.responseMapper(service.registrarAluno(AlunosMapper.RequestMapper(request))));
     }
 
     @PutMapping("/updateById/{id}")
-    public ResponseEntity<AlunosResponse> alunoAtualizado(@RequestBody AlunosRequest alunos,@PathVariable UUID id){
+    public ResponseEntity<AlunosResponse> alunoAtualizado(@RequestBody @Valid AlunosRequest alunos,@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(AlunosMapper.responseMapper(service.atualizarAluno(AlunosMapper.RequestMapper(alunos), id)));
     }

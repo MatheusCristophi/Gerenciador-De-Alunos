@@ -17,7 +17,7 @@ public class AlunosService {
     }
 
     @Transactional
-    public Alunos salvarAluno(Alunos alunos){
+    public Alunos registrarAluno(Alunos alunos){
             return repositorio.save(alunos);
     }
 

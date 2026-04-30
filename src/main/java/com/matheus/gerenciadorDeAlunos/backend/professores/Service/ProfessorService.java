@@ -18,7 +18,7 @@ public class ProfessorService {
     }
 
     @Transactional
-    public Professores saveProfessor(Professores professores){
+    public Professores registrar(Professores professores){
         return repositorio.save(professores);
     }
 
@@ -44,6 +44,9 @@ public class ProfessorService {
                 .orElseThrow(()-> new RuntimeException("Id não encontrado"));
         if (prof.getName() != null) {
             profAtt.setName(prof.getName());
+        }
+        if(prof.getEmail() != null){
+            profAtt.setEmail(prof.getEmail());
         }
         if (prof.getIdade() != 0) {
             profAtt.setIdade(prof.getIdade());

@@ -4,6 +4,7 @@ import com.matheus.gerenciadorDeAlunos.backend.professores.Controller.mapper.Pro
 import com.matheus.gerenciadorDeAlunos.backend.professores.Controller.request.ProfessoresRequest;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Controller.response.ProfessoresResponse;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Service.ProfessorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("/manager")
+@RestController("/professor")
 public class ProfessoresController {
     ProfessorService service;
 
@@ -35,13 +36,13 @@ public class ProfessoresController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ProfessoresResponse> saveUser(@RequestBody ProfessoresRequest professores){
+    public ResponseEntity<ProfessoresResponse> registrar(@RequestBody @Valid ProfessoresRequest professores){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ProfessoresMapper.responseProfessores(service.saveProfessor(ProfessoresMapper.requestProfessores(professores))));
+                .body(ProfessoresMapper.responseProfessores(service.registrar(ProfessoresMapper.requestProfessores(professores))));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ProfessoresResponse> updateUser(@PathVariable UUID id, @RequestBody ProfessoresRequest professores){
+    public ResponseEntity<ProfessoresResponse> updateUser(@PathVariable UUID id, @RequestBody @Valid ProfessoresRequest professores){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ProfessoresMapper.responseProfessores(service.updateTeatcher(id, ProfessoresMapper.requestProfessores(professores))));
     }

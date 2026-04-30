@@ -14,6 +14,8 @@ public class ProfessoresMapper {
                 .builder()
                 .name(request.nome())
                 .idade(request.idade())
+                .email(request.email())
+                .senha(request.senha())
                 .build();
     }
 
