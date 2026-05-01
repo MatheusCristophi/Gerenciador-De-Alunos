@@ -1,7 +1,7 @@
 package com.matheus.gerenciadorDeAlunos.backend.professores.model;
 
 import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
-import com.matheus.gerenciadorDeAlunos.backend.config.securityConfig.RoleEnums;
+import com.matheus.gerenciadorDeAlunos.backend.shared.enums.RoleEnums;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;

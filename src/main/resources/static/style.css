@@ -1,39 +1,43 @@
 *{
-    font-family: Arial;
     padding: 0px;
     margin: 0px;
 }
-section{
-    display: flex;
+
+body{
+    font-family: Verdana;
 }
-header{
-    position: fixed;
+
+.header{
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
-#titulo {
+
+.header > h1{
     cursor: pointer;
-    padding: 10px 40px 10px;
+    font-size: 26px;
+    padding: 0px 30px;
 }
-#cabecalho{
-    background-color: #0b1523;
+
+.header{
+    background-color: #1f2d41;
     color: white;
     display: flex;
     justify-content: space-between;
-    padding: 10px 40px 10px;
-
+    padding: 10px;
 }
-#listacabecalho, nav{
-    color: white;
+
+.header > nav > ul{
     text-transform: none;
     list-style-type: none;
     display: flex;
-    gap: 20px;
-    padding: 10px 40px 10px;
+    padding: 0px 30px;
+    gap: 30px;
 }
-.licabecalho:hover{
-    color: white;
+.header > nav > ul > li:hover{
+    color: #3f6fb3;
     cursor: pointer;
 }

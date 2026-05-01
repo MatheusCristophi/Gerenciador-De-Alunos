@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize.
+                .authorizeHttpRequests(auth -> auth.
                         requestMatchers(HttpMethod.POST, "admin/registrar").permitAll().
                         requestMatchers(HttpMethod.POST, "aluno/registrar").permitAll().
                         requestMatchers(HttpMethod.POST, "professor/registrar").permitAll().

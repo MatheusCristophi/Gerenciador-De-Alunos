@@ -1,0 +1,17 @@
+services:
+  app-alunos:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRE_DB_URL=jdbc:db-alunos:5432/banco-de-dados
+    depends_on:
+      - db-alunos
+
+  db-alunos:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=banco-de-dados
+      - POSTGRES_PASSWORD=sua-senha
+    ports:
+      - "5432:5432"

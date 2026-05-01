@@ -1,4 +1,4 @@
-package com.matheus.gerenciadorDeAlunos.backend.config.securityConfig;
+package com.matheus.gerenciadorDeAlunos.backend.shared.enums;
 
 public enum RoleEnums {
     ALUNO("ROLE_ALUNO"),
