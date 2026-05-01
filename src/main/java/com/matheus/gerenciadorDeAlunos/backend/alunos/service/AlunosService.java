@@ -2,6 +2,9 @@ package com.matheus.gerenciadorDeAlunos.backend.alunos.service;
 
 import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.repository.AlunosRepositorio;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AlunosService {
+public class AlunosService implements UserDetailsService {
     final AlunosRepositorio repositorio;
 
     public AlunosService(AlunosRepositorio alunosRepositorio) {
@@ -67,5 +70,10 @@ public class AlunosService {
                 alunoExistente.setAlunoId(alunoExistente.getAlunoId());
             }
             return repositorio.save(alunoExistente);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return repositorio.findByEmail(email);
     }
 }
