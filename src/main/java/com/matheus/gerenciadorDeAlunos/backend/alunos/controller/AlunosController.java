@@ -37,12 +37,6 @@ public class AlunosController {
                 .body(AlunosMapper.responseMapper(service.mostrarAlunoViaId(id)));
     }
 
-    @PostMapping("/registrar")
-    public ResponseEntity<AlunosResponse> registrar(@RequestBody @Valid AlunosRequest request){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(AlunosMapper.responseMapper(service.registrarAluno(AlunosMapper.RequestMapper(request))));
-    }
-
     @PutMapping("/updateById/{id}")
     public ResponseEntity<AlunosResponse> alunoAtualizado(@RequestBody @Valid AlunosRequest alunos,@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK)

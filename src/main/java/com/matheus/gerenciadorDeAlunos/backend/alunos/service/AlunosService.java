@@ -2,9 +2,11 @@ package com.matheus.gerenciadorDeAlunos.backend.alunos.service;
 
 import com.matheus.gerenciadorDeAlunos.backend.alunos.model.Alunos;
 import com.matheus.gerenciadorDeAlunos.backend.alunos.repository.AlunosRepositorio;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,16 +14,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AlunosService implements UserDetailsService {
-    final AlunosRepositorio repositorio;
-
-    public AlunosService(AlunosRepositorio alunosRepositorio) {
-        this.repositorio = alunosRepositorio;
-    }
+    private final AlunosRepositorio repositorio;
+    private final PasswordEncoder encoder;
 
     @Transactional
     public Alunos registrarAluno(Alunos alunos){
-            return repositorio.save(alunos);
+        String senha = alunos.getSenha();
+        alunos.setSenha(encoder.encode(senha));
+        return repositorio.save(alunos);
     }
 
 
@@ -64,6 +66,9 @@ public class AlunosService implements UserDetailsService {
             }else{
                 alunoExistente.setProfessores(alunoExistente.getProfessores());
             }
+            if (alunos.getSenha() != null){
+                alunoExistente.setSenha(encoder.encode(alunos.getSenha()));
+            }
             if (alunos.getNotasT() != null){
                 alunoExistente.setNotasT(alunos.getNotasT());
             }else{
@@ -74,6 +79,7 @@ public class AlunosService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return repositorio.findByEmail(email);
+        return repositorio.findByEmail(email)
+                .orElseThrow(()-> new RuntimeException("Email ou Senha inválida"));
     }
 }

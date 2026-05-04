@@ -35,12 +35,6 @@ public class ProfessoresController {
                 .body(ProfessoresMapper.responseProfessores(service.showTeacherById(id)));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ProfessoresResponse> registrar(@RequestBody @Valid ProfessoresRequest professores){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ProfessoresMapper.responseProfessores(service.registrar(ProfessoresMapper.requestProfessores(professores))));
-    }
-
     @PutMapping("/update")
     public ResponseEntity<ProfessoresResponse> updateUser(@PathVariable UUID id, @RequestBody @Valid ProfessoresRequest professores){
         return ResponseEntity.status(HttpStatus.OK)
