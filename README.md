@@ -1,3 +1,5 @@
+## Projeto Em andamento (Endpoints,tecnologias, e forma de como executar o programa desatualizados)
+
 ## 📚 Gerenciador de Alunos
 
 API REST desenvolvida com Spring Boot para gerenciamento de alunos.
