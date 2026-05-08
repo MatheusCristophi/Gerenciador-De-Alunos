@@ -7,6 +7,7 @@ import com.matheus.gerenciadorDeAlunos.backend.alunos.service.AlunosService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class AlunosController {
     }
 
     @GetMapping("/read")
+    @PreAuthorize("hasRole('ADMINISTRADOR', 'PROFESSOR')")
     public ResponseEntity<List<AlunosResponse>> mostrarTodosOsAlunos(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.mostrarTodosAlunos()
@@ -30,20 +32,22 @@ public class AlunosController {
                         .toList());
     }
 
-    @GetMapping("/readById/{id}")
+    @GetMapping("/readId/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR', 'PROFESSOR')")
     public ResponseEntity<AlunosResponse> mostrarAlunoPeloId(@PathVariable UUID id){
-        AlunosResponse alunoBuscado = AlunosMapper.responseMapper(service.mostrarAlunoViaId(id));
         return ResponseEntity.status(HttpStatus.FOUND)
                 .body(AlunosMapper.responseMapper(service.mostrarAlunoViaId(id)));
     }
 
-    @PutMapping("/updateById/{id}")
+    @PutMapping("/updateId/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR', 'PROFESSOR')")
     public ResponseEntity<AlunosResponse> alunoAtualizado(@RequestBody @Valid AlunosRequest alunos,@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(AlunosMapper.responseMapper(service.atualizarAluno(AlunosMapper.RequestMapper(alunos), id)));
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR', 'PROFESSOR')")
     public void deletaraluno(@PathVariable UUID id){
         service.deletarAlunoViaId(id);
     }

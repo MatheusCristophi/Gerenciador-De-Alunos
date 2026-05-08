@@ -25,19 +25,19 @@ public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @JdbcTypeCode(SqlTypes.UUID)
-    @Column(name = "admin_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "admin_name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String nome;
 
-    @Column(name = "admin_email", unique = true , nullable = false)
+    @Column(name = "email", unique = true , nullable = false)
     private String email;
 
-    @Column(name = "admin_password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String senha;
 
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     public RoleEnums role = RoleEnums.ADMINISTRADOR;
 
     @Override

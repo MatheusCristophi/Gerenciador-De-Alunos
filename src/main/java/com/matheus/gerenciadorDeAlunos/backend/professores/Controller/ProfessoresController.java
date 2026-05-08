@@ -7,6 +7,7 @@ import com.matheus.gerenciadorDeAlunos.backend.professores.Service.ProfessorServ
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ProfessoresController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<List<ProfessoresResponse>> getAllUser(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.showAllTeachers()
@@ -30,18 +32,21 @@ public class ProfessoresController {
     }
 
     @GetMapping("/getuser")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ProfessoresResponse> getUserById(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.FOUND)
                 .body(ProfessoresMapper.responseProfessores(service.showTeacherById(id)));
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ProfessoresResponse> updateUser(@PathVariable UUID id, @RequestBody @Valid ProfessoresRequest professores){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ProfessoresMapper.responseProfessores(service.updateTeatcher(id, ProfessoresMapper.requestProfessores(professores))));
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
         service.deleteTeacherById(id);
         return new ResponseEntity<>(HttpStatus.OK);

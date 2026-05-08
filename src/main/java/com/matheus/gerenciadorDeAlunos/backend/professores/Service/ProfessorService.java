@@ -15,12 +15,15 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ProfessorService implements UserDetailsService {
+public class ProfessorService{
     private final ProfessoresRepositorio repositorio;
     private final PasswordEncoder encoder;
 
     @Transactional
     public Professores registrar(Professores professores){
+        if (repositorio.findByEmail(professores.getEmail()).isPresent()){
+            throw new RuntimeException("Email ja cadastrado");
+        }
         String senha = professores.getSenha();
         professores.setSenha(encoder.encode(senha));
         return repositorio.save(professores);
@@ -62,11 +65,5 @@ public class ProfessorService implements UserDetailsService {
             profAtt.setAlunos(prof.getAlunos());
         }
         return repositorio.save(profAtt);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return repositorio.findByEmail(email)
-                .orElseThrow(()-> new RuntimeException("Email ou Senha inválida"));
     }
 }

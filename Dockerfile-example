@@ -1,4 +1,4 @@
-FROM maven:3.8.6-openjdk-18 AS build
+FROM maven:3.8.4-eclipse-temurin-17 AS build
 WORKDIR /app
 
 COPY pom.xml .
@@ -7,7 +7,7 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM openjdk:18-jdk-slim
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
@@ -15,5 +15,11 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
 ENV POSTGRE_DB_URL=jdbc:postgresql://db_container_name:5432/nome_do_banco
+
+ENV POSTGRE_DB_USER=db_user
+
+ENV POSTGRE_DB_PASSWORD=db_password
+
+ENV JWT_SECRET=your_jwt_secret_key
 
 CMD ["java", "-jar", "app.jar"]

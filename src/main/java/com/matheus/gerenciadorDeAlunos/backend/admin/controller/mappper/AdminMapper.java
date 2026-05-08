@@ -20,6 +20,7 @@ public class AdminMapper {
     public static AdminResponse adminResponse(Admin admin){
         return AdminResponse
                 .builder()
+                .id(admin.getId())
                 .nome(admin.getNome())
                 .email(admin.getEmail())
                 .build();

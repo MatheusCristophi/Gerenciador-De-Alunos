@@ -1,0 +1,49 @@
+package com.matheus.gerenciadorDeAlunos.backend.config.tokenService;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+@Service
+public class TokenService{
+    private String secretKey = "${JWT_SECRET}";
+
+    public String generateToken(UserDetails userDetails){
+    try {
+        Algorithm algorithm = Algorithm.HMAC256(secretKey);
+        String token = JWT.create()
+                .withIssuer("gerenciador-de-alunos")
+                .withSubject(userDetails.getUsername())
+                .withExpiresAt(expireDate())
+                .sign(algorithm);
+        return token;
+    } catch (JWTCreationException exception) {
+        throw new JWTCreationException("Erro ao criar o token", exception);
+    }
+}
+
+    public String validateToken(String token){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
+            return JWT.require(algorithm)
+                    .withIssuer("gerenciador-de-alunos")
+                    .build().
+                    verify(token)
+                    .getSubject();
+        } catch (JWTVerificationException exception){
+            return "";
+        }
+    }
+
+    private Instant expireDate(){
+        return LocalDateTime.now().plusDays(2).toInstant(ZoneOffset.of("_03:00"));
+    }
+}
