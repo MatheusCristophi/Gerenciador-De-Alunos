@@ -40,7 +40,7 @@ public class Professores implements UserDetails {
     private int idade;
 
     @Column(nullable = false)
-    public RoleEnums role = RoleEnums.PROFESSOR;
+    public final RoleEnums role = RoleEnums.PROFESSOR;
 
     @ManyToMany
     @JoinTable(

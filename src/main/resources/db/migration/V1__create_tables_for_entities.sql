@@ -1,19 +1,25 @@
 CREATE TABLE tb_alunos(
     aluno_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
     nome VARCHAR(255) NOT NULL,
-    periodo SMALLINT NOT NULL
+    role SMALLINT NULL,
+    periodo INTEGER NOT NULL
 );
 
 CREATE TABLE tb_notas_alunos (
     aluno_id UUID NOT NULL,
-    nota FLOAT4,
+    nota FLOAT4 NULL,
     CONSTRAINT fk_notas_aluno FOREIGN KEY (aluno_id) REFERENCES tb_alunos(aluno_id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_professores (
     professor_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    idade INT NOT NULL
+    role SMALLINT NULL,
+    idade INTEGER NOT NULL
 );
 
 CREATE TABLE alunos_professores (
@@ -24,9 +30,10 @@ CREATE TABLE alunos_professores (
     CONSTRAINT fk_aluno FOREIGN KEY (aluno_id) REFERENCES tb_alunos(aluno_id)
 );
 
-CREATE TABLE administrador (
-    admin_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    admin_name VARCHAR(255) NOT NULL,
-    admin_email VARCHAR(255) UNIQUE NOT NULL,
-    admin_password VARCHAR(255) NOT NULL
+CREATE TABLE tb_administradores (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    role SMALLINT NULL,
+    password VARCHAR(255) NOT NULL
 );

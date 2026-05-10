@@ -38,7 +38,7 @@ public class Alunos implements UserDetails {
     private String nome;
 
     @Column(nullable = false)
-    public RoleEnums role = RoleEnums.ALUNO;
+    public final RoleEnums role = RoleEnums.ALUNO;
 
     @Column(nullable = false)
     private int periodo;

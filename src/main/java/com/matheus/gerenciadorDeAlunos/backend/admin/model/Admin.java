@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "administrador")
+@Table(name = "tb_administradores")
 @Builder
 @Getter
 @Setter
@@ -38,7 +38,7 @@ public class Admin implements UserDetails {
     private String senha;
 
     @Column(name = "role", nullable = false)
-    public RoleEnums role = RoleEnums.ADMINISTRADOR;
+    public final RoleEnums role = RoleEnums.ADMINISTRADOR;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
