@@ -31,21 +31,21 @@ public class ProfessoresController {
                     .toList());
     }
 
-    @GetMapping("/getuser")
+    @GetMapping("/getuser/{id}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ProfessoresResponse> getUserById(@PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.FOUND)
                 .body(ProfessoresMapper.responseProfessores(service.showTeacherById(id)));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ProfessoresResponse> updateUser(@PathVariable UUID id, @RequestBody @Valid ProfessoresRequest professores){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ProfessoresMapper.responseProfessores(service.updateTeatcher(id, ProfessoresMapper.requestProfessores(professores))));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
         service.deleteTeacherById(id);

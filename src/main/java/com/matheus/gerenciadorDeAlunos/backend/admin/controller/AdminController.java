@@ -17,7 +17,7 @@ public class AdminController {
         this.service = service;
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("delete/{id}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public void deleteById(@PathVariable UUID id){
         service.deleteById(id);

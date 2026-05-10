@@ -10,7 +10,6 @@ import com.matheus.gerenciadorDeAlunos.backend.alunos.controller.response.Alunos
 import com.matheus.gerenciadorDeAlunos.backend.alunos.service.AlunosService;
 import com.matheus.gerenciadorDeAlunos.backend.config.securityController.request.LoginRequest;
 import com.matheus.gerenciadorDeAlunos.backend.config.securityController.response.LoginResponse;
-import com.matheus.gerenciadorDeAlunos.backend.config.securityService.SecurityService;
 import com.matheus.gerenciadorDeAlunos.backend.config.tokenService.TokenService;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Controller.mapper.ProfessoresMapper;
 import com.matheus.gerenciadorDeAlunos.backend.professores.Controller.request.ProfessoresRequest;
@@ -25,7 +24,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +39,9 @@ public class SecurityController {
     private final ProfessorService professorService;
     private final ObjectProvider<AuthenticationManager> authenticationManager;
     private final TokenService tokenService;
-    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("admin/registrar")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<AdminResponse> registrarAdmin(@RequestBody @Valid AdminRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(AdminMapper.adminResponse(adminService.registrar(AdminMapper.adminRequest(request))));
