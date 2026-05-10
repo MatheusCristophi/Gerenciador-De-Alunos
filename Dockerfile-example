@@ -6,6 +6,8 @@ COPY target/gerenciador-de-alunos-0.0.1-SNAPSHOT.jar /app/gerenciadorAlunos.jar
 
 COPY src /app/src
 
+COPY pom.xml /app/pom.xml
+
 RUN mvn clean package -DskipTests
 
 EXPOSE 8080
