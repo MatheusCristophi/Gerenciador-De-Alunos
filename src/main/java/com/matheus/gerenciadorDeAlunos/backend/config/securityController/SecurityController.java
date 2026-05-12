@@ -40,28 +40,27 @@ public class SecurityController {
     private final ObjectProvider<AuthenticationManager> authenticationManager;
     private final TokenService tokenService;
 
-    @PostMapping("admin/registrar")
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/admin/registrar")
     public ResponseEntity<AdminResponse> registrarAdmin(@RequestBody @Valid AdminRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(AdminMapper.adminResponse(adminService.registrar(AdminMapper.adminRequest(request))));
     }
 
-    @PostMapping("aluno/registrar")
+    @PostMapping("/aluno/registrar")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<AlunosResponse> registrarAluno(@RequestBody @Valid AlunosRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(AlunosMapper.responseMapper(alunosService.registrarAluno(AlunosMapper.RequestMapper(request))));
     }
 
-    @PostMapping("professor/registrar")
+    @PostMapping("/professor/registrar")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ProfessoresResponse> registrarProfessor(@RequestBody @Valid ProfessoresRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ProfessoresMapper.responseProfessores(professorService.registrar(ProfessoresMapper.requestProfessores(request))));
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
         var userAndPassword = new UsernamePasswordAuthenticationToken(request.email(), request.senha());
         var auth = authenticationManager.getObject().authenticate(userAndPassword);
